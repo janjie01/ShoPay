@@ -46,13 +46,14 @@ function Dashboard() {
       <div>
         <CustomNavbar />
       </div>
+
       <Container fluid className="mt-5 pt-5">
         <Row xs={2} md={3} lg={4} xl={5} xxl={6} className="g-4">
           {productData.map((product, index) => (
             <Col key={index}>
               <Card
                 style={{
-                  width: "12rem",
+                  width: "250px",
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
