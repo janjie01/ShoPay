@@ -10,7 +10,7 @@ const CartPage = () => {
   useEffect(() => {
     const fetchCartData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/cart`, {
+        const response = await fetch(`https://shopay-t848.onrender.com/cart`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -37,7 +37,7 @@ const CartPage = () => {
 
   const handleCheckout = async (item) => {
     try {
-        const response = await fetch(`http://localhost:3000/checkout`, {
+        const response = await fetch(`https://shopay-t848.onrender.com/checkout`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ const CartPage = () => {
   };
   
   const handleLogout = () => {
-    fetch(`http://localhost:3000/logout`, {
+    fetch(`https://shopay-t848.onrender.com/logout`, {
         method: 'POST',
         credentials: 'include',
         headers: {

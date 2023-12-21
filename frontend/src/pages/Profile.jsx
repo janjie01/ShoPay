@@ -17,7 +17,7 @@ function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/profile`, {
+        const response = await fetch(`https://shopay-t848.onrender.com/profile`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -57,7 +57,7 @@ function Profile() {
   }, []);
 
   const handleLogout = () => {
-    fetch(`http://localhost:3000/logout`, {
+    fetch(`https://shopay-t848.onrender.com/logout`, {
         method: 'POST',
         credentials: 'include',
         headers: {
