@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import CustomNavbar from './NavigationBar';
-import { Card, Image, Container, Row, Col } from 'react-bootstrap';
+import { Card, Button, Container, Row, Col, Navbar, Nav, Image } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 function Profile() {
+  const navigate = useNavigate();
   const [profileData, setProfileData] = useState({
     profilePicture: '',
     name: '',
@@ -16,7 +17,7 @@ function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://shopay-t848.onrender.com/profile`, {
+        const response = await fetch(`http://localhost:3000/profile`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -54,12 +55,43 @@ function Profile() {
   
     fetchData();
   }, []);
-  
+
+  const handleLogout = () => {
+    fetch(`http://localhost:3000/logout`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.Status === 'Success') {
+            console.log('Logout Successfully');
+            navigate('/');
+        } else {
+            console.error('Logout failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error during logout:', error);
+    });
+};
 
   return (
     <>
       <div>
-        <CustomNavbar />
+          <Navbar bg="success" variant="dark" expand="lg" fixed="top" className="p-2">
+          <Navbar.Brand href="/"><strong>ShoPay</strong></Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto d-flex align-items-center">
+              <Nav.Link href="/profile" className="mr-3">Profile</Nav.Link>
+              <Nav.Link href="/cart" className="mr-3">Cart</Nav.Link>
+              <Button variant="light" onClick={handleLogout}>Logout</Button>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       </div>
       <Container className='mt-3 pt-5'>
         

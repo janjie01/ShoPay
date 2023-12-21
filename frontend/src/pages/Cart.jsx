@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Card, Button } from 'react-bootstrap';
-import CustomNavbar from './NavigationBar';
+import { Card, Button, Container, Row, Col, Navbar, Nav, Image } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 const CartPage = () => {
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchCartData = async () => {
       try {
-        const response = await fetch(`https://shopay-t848.onrender.com/cart`, {
+        const response = await fetch(`http://localhost:3000/cart`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -24,7 +25,6 @@ const CartPage = () => {
         // Assuming data is in the format { data: [...cartItems] }
         if (data && data.data) {
           setCartItems(data.data);
-          console.log(data);
         }
       } catch (error) {
         console.error('Error fetching cart data:', error);
@@ -37,7 +37,7 @@ const CartPage = () => {
 
   const handleCheckout = async (item) => {
     try {
-        const response = await fetch(`https://shopay-t848.onrender.com/checkout`, {
+        const response = await fetch(`http://localhost:3000/checkout`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -65,13 +65,43 @@ const CartPage = () => {
     }
   };
   
-  
+  const handleLogout = () => {
+    fetch(`http://localhost:3000/logout`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.Status === 'Success') {
+            console.log('Logout Successfully');
+            navigate('/');
+        } else {
+            console.error('Logout failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error during logout:', error);
+    });
+  };
   
 
   return (
     <>
-        <div>
-        <CustomNavbar />
+      <div>
+        <Navbar bg="success" variant="dark" expand="lg" fixed="top" className="p-2">
+          <Navbar.Brand href="/"><strong>ShoPay</strong></Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto d-flex align-items-center">
+              <Nav.Link href="/profile" className="mr-3">Profile</Nav.Link>
+              <Nav.Link href="/cart" className="mr-3">Cart</Nav.Link>
+              <Button variant="light" onClick={handleLogout}>Logout</Button>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       </div>
 
       <Container className='mt-5 m-5'>
