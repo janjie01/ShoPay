@@ -88,6 +88,8 @@ function Dashboard() {
                   src={product.product_photo}
                   style={{ height: "50%", objectFit: "cover" }}
                 />
+                <Card.Text>Price: {product.product_price}</Card.Text>
+                <Card.Text>Available Quantity: {product.product_qty}</Card.Text>
                 <Card.Body className="d-flex flex-column">
                   <Card.Title>{product.product_name}</Card.Title>
                   <Card.Text>{product.product_description}</Card.Text>
