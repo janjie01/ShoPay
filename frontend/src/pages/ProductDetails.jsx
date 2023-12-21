@@ -139,6 +139,9 @@ function ProductDetails() {
                   {productDetails.product_description}
                 </Card.Subtitle>
                 <Card.Subtitle className="mb-2">
+                  Price: {productDetails.product_price}
+                </Card.Subtitle>
+                <Card.Subtitle className="mb-2">
                   Available Quantity: {productDetails.product_qty}
                 </Card.Subtitle>
                 <Button variant="secondary" onClick={addToCart}>
