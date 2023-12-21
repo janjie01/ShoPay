@@ -82,7 +82,7 @@ function Profile() {
     <>
       <div>
           <Navbar bg="success" variant="dark" expand="lg" fixed="top" className="p-2">
-          <Navbar.Brand href="/"><strong>ShoPay</strong></Navbar.Brand>
+          <Navbar.Brand href="/dashboard"><strong>ShoPay</strong></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto d-flex align-items-center">
