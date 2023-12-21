@@ -62,7 +62,8 @@ function Dashboard() {
                 <Card.Img
                   variant="top"
                   src={product.product_photo}
-                  style={{ height: "50%", objectFit: "cover" }}
+                  className="img-fluid"
+                  style={{ objectFit: "cover", maxHeight: "50%" }}
                 />
                 <Card.Body className="d-flex flex-column">
                   <Card.Title>{product.product_name}</Card.Title>
