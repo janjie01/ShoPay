@@ -35,7 +35,7 @@ const authenticateToken = (req, res, next) => {
 const app = express();
 const port = process.env.PORT || 3000;
 const corsOptions = {
-    origin: ["https://shop-pay-app.onrender.com"],
+    origin: ["https://shopayapp.netlify.app"],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   };
