@@ -54,17 +54,23 @@ function Dashboard() {
               <Card
                 style={{
                   width: "13rem",
-                  height: "100%",
+                  height: "20rem", // Set a fixed height for the card
                   display: "flex",
                   flexDirection: "column",
                 }}
               >
-                <Card.Img
-                  variant="top"
-                  src={product.product_photo}
-                  className="img-fluid"
-                  style={{ objectFit: "cover", maxHeight: "50%" }}
-                />
+                <div style={{ overflow: "hidden", height: "50%" }}>
+                  <Card.Img
+                    variant="top"
+                    src={product.product_photo}
+                    className="img-fluid"
+                    style={{
+                      objectFit: "cover",
+                      width: "100%",
+                      height: "100%",
+                    }}
+                  />
+                </div>
                 <Card.Body className="d-flex flex-column">
                   <Card.Title>{product.product_name}</Card.Title>
                   <Card.Text>{product.product_description}</Card.Text>
