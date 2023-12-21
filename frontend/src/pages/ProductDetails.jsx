@@ -1,16 +1,7 @@
 // ProductDetails.js
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import {
-  Card,
-  Button,
-  Container,
-  Row,
-  Col,
-  Navbar,
-  Nav,
-  Image,
-} from "react-bootstrap";
+import { Card, Button, Container, Row, Col, Navbar, Nav, Image } from "react-bootstrap";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +9,7 @@ function ProductDetails() {
   const navigate = useNavigate();
   const [cookies, , removeCookie] = useCookies(["token"]);
   const isTokenPresent = !!cookies.token;
-  // Extract the product ID from the URL params
+
   const { id } = useParams();
   const [productDetails, setProductDetails] = useState(null);
   const [status, setStatus] = useState("");
@@ -33,29 +24,24 @@ function ProductDetails() {
       .catch((error) => {
         console.error("Error fetching product details:", error);
       });
-  }, [id]);
+  }, [id, isTokenPresent]);
 
   const addToCart = async () => {
     try {
-      const response = await fetch(
-        `https://shopay-t848.onrender.com/add-to-cart`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify({ productId: parseInt(id, 10) }),
-        }
-      );
+      const response = await fetch(`https://shopay-t848.onrender.com/add-to-cart`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({ productId: parseInt(id, 10) }),
+      });
 
       const data = await response.json();
 
       if (response.status === 401) {
-        // Handle 405 (Method Not Allowed) - Show an alert
         alert("You must log in first.");
       } else {
-        // Handle other response statuses
         setStatus(data.status);
       }
     } catch (error) {
@@ -76,6 +62,7 @@ function ProductDetails() {
       .then((data) => {
         if (data.Status === "Success") {
           console.log("Logout Successfully");
+          removeCookie("token");
           navigate("/");
         } else {
           console.error("Logout failed");
@@ -92,49 +79,39 @@ function ProductDetails() {
 
   return (
     <>
-      <div>
-        <Navbar
-          bg="success"
-          variant="dark"
-          expand="lg"
-          fixed="top"
-          className="p-2"
-        >
-          <Navbar.Brand href="/">
-            <strong>ShoPay</strong>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto d-flex align-items-center">
-              {isTokenPresent ? (
-                <>
-                  <Navbar bg="success" variant="dark" expand="lg" fixed="top" className="p-2">
-                  <Navbar.Brand href="/dashboard"><strong>ShoPay</strong></Navbar.Brand>
-                  <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                  <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="ml-auto d-flex align-items-center">
-                      <Nav.Link href="/profile" className="mr-3">Profile</Nav.Link>
-                      <Nav.Link href="/cart" className="mr-3">Cart</Nav.Link>
-                      <Button variant="light" onClick={handleLogout}>Logout</Button>
-                    </Nav>
-                  </Navbar.Collapse>
-                  </Navbar>
-                </>
-              ) : (
-                <Button variant="light" href="/login">
-                  Login
+      <Navbar bg="success" variant="dark" expand="lg" fixed="top" className="p-2">
+        <Navbar.Brand href="/">
+          <strong>ShoPay</strong>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="ml-auto d-flex align-items-center">
+            {isTokenPresent ? (
+              <>
+                <Nav.Link href="/profile" className="mr-3">
+                  Profile
+                </Nav.Link>
+                <Nav.Link href="/cart" className="mr-3">
+                  Cart
+                </Nav.Link>
+                <Button variant="light" onClick={handleLogout}>
+                  Logout
                 </Button>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </div>
+              </>
+            ) : (
+              <Button variant="light" href="/login">
+                Login
+              </Button>
+            )}
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
 
       <Container className="mt-3 pt-5">
         <Row className="justify-content-center">
           <Col md={6}>
             <Card>
-              <Image src={productDetails.product_photo} alt="Profile" fluid />
+              <Image src={productDetails.product_photo} alt="Product" fluid />
               <Card.Body>
                 <Card.Title>{productDetails.product_name}</Card.Title>
                 <Card.Subtitle className="mb-2">
