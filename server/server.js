@@ -157,7 +157,7 @@ app.post('/login', (req, res) => {
               
               // Sign the token using the selected secret key
               const token = jwt.sign({ userId, name }, secretKey, { expiresIn: '1d' });
-              res.cookie('token', token);
+              res.cookie('token', token, { sameSite: 'None', secure: true });
 
               return res.json({ Status: "Success", Role: userRole, UserId: userId });
           } else {
@@ -212,8 +212,8 @@ app.get('/profile', authenticateToken, (req, res) => {
 });
 //Logout
 app.post('/logout', (req, res) => {
-    res.cookie('token', '', { expires: new Date(0) });
-    return res.json({ Status: 'Success' });
+  res.cookie('token', '', { expires: new Date(0), sameSite: 'None', secure: true });
+  return res.json({ Status: 'Success' });
 });
 //get all user
 app.get('/data', (req, res) => {
