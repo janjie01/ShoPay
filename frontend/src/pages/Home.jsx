@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, Button, Container, Row, Col } from "react-bootstrap";
-import CustomNavbar from "./NavigationBar";
+import {
+  Card,
+  Button,
+  Container,
+  Row,
+  Col,
+  Navbar,
+  Nav,
+} from "react-bootstrap";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -44,33 +51,43 @@ function Dashboard() {
   return (
     <>
       <div>
-        <CustomNavbar />
+        <Navbar
+          bg="success"
+          variant="dark"
+          expand="lg"
+          fixed="top"
+          className="p-2"
+        >
+          <Navbar.Brand href="/">
+            <strong>ShoPay</strong>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="ml-auto d-flex align-items-center">
+              <Button variant="light" href="/login">
+                Login
+              </Button>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
       </div>
-
       <Container fluid className="mt-5 pt-5">
         <Row xs={2} md={3} lg={4} xl={5} xxl={6} className="g-4">
           {productData.map((product, index) => (
             <Col key={index}>
               <Card
                 style={{
-                  width: "13rem",
+                  width: "12rem",
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
                 }}
               >
-                <div style={{ overflow: "hidden", height: "50%" }}>
-                  <Card.Img
-                    variant="top"
-                    src={product.product_photo}
-                    className="img-fluid"
-                    style={{
-                      objectFit: "cover",
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  />
-                </div>
+                <Card.Img
+                  variant="top"
+                  src={product.product_photo}
+                  style={{ height: "50%", objectFit: "cover" }}
+                />
                 <Card.Body className="d-flex flex-column">
                   <Card.Title>{product.product_name}</Card.Title>
                   <Card.Text>{product.product_description}</Card.Text>
