@@ -54,7 +54,7 @@ function Dashboard() {
               <Card
                 style={{
                   width: "13rem",
-                  height: "20rem", // Set a fixed height for the card
+                  height: "100%",
                   display: "flex",
                   flexDirection: "column",
                 }}
