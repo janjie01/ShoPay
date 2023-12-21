@@ -53,7 +53,7 @@ function Dashboard() {
             <Col key={index}>
               <Card
                 style={{
-                  width: "200px",
+                  width: "13rem",
                   height: "100%",
                   display: "flex",
                   flexDirection: "column",
