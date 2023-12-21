@@ -34,15 +34,16 @@ const authenticateToken = (req, res, next) => {
 
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const corsOptions = {
-    origin: 'http://localhost:5173',
+    origin: [process.env.CORS_ORIGIN],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   };
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
+
 
 app.use(cors({
     origin: ["*"],

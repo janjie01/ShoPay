@@ -9,7 +9,7 @@ function Dashboard() {
   const [productData, setProductData] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/product')
+    fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/product`)
       .then((response) => response.json())
       .then((responseData) => {
         setProductData(responseData);
@@ -20,7 +20,7 @@ function Dashboard() {
   }, []);
 
     const handleLogout = () => {
-        fetch('http://localhost:3000/logout', {
+        fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/logout`, {
             method: 'POST',
             credentials: 'include',
             headers: {

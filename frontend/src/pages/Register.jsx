@@ -24,7 +24,7 @@ function Register() {
 
     try {
       await registrationSchema.validate(values, { abortEarly: false });
-      const response = await axios.post('http://localhost:3000/register', values);
+      const response = await axios.post(`${import.meta.env.VITE_REACT_APP_API_URL}/register`, values);
 
       if (response && response.data && response.data.Status === 'Success') {
         navigate('/login');
