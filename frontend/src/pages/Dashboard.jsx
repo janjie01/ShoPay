@@ -9,7 +9,7 @@ function Dashboard() {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    fetch( `https://shopayapp.netlify.app/product`)
+    fetch( `https://shopay-t848.onrender.com/product`)
       .then((response) => response.json())
       .then((responseData) => {
         setProductData(responseData);
@@ -20,7 +20,7 @@ function Dashboard() {
   }, []);
 
   const handleLogout = () => {
-    fetch(`https://shopayapp.netlify.app/logout`, {
+    fetch(`https://shopay-t848.onrender.com/logout`, {
       method: 'POST',
       credentials: 'include',
       headers: {
