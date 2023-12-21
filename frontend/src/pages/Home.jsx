@@ -51,22 +51,14 @@ function Dashboard() {
   return (
     <>
       <div>
-        <Navbar
-          bg="success"
-          variant="dark"
-          expand="lg"
-          fixed="top"
-          className="p-2"
-        >
-          <Navbar.Brand href="/">
-            <strong>ShoPay</strong>
-          </Navbar.Brand>
+        <Navbar bg="success" variant="dark" expand="lg" fixed="top" className="p-2">
+          <Navbar.Brand href="/"><strong>ShoPay</strong></Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto d-flex align-items-center">
-              <Button variant="light" href="/login">
-                Login
-              </Button>
+              <Nav.Link href="/profile" className="mr-3">Profile</Nav.Link>
+              <Nav.Link href="/cart" className="mr-3">Cart</Nav.Link>
+              <Button variant="light" onClick={handleLogout}>Logout</Button>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
