@@ -87,7 +87,6 @@ const CartPage = () => {
     });
   };
   
-
   return (
     <>
       <div>
