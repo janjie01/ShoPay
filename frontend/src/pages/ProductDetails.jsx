@@ -12,7 +12,7 @@ function ProductDetails() {
 
   useEffect(() => {
     // Fetch product details based on the product_id
-    fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/product/${id}`)
+    fetch(`https://shopay-t848.onrender.com/product/${id}`)
       .then((response) => response.json())
       .then((responseData) => {
         setProductDetails(responseData);
@@ -24,7 +24,7 @@ function ProductDetails() {
 
   const addToCart = async () => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/add-to-cart`, {
+        const response = await fetch(`https://shopay-t848.onrender.com/add-to-cart`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

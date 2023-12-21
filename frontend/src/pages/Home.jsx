@@ -9,7 +9,7 @@ function Dashboard() {
   const [productData, setProductData] = useState([]);
 
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/product`)
+    fetch(`https://shopay-t848.onrender.com/product`)
       .then((response) => response.json())
       .then((responseData) => {
         setProductData(responseData);
@@ -20,7 +20,7 @@ function Dashboard() {
   }, []);
 
     const handleLogout = () => {
-        fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/logout`, {
+        fetch(`https://shopay-t848.onrender.com/logout`, {
             method: 'POST',
             credentials: 'include',
             headers: {

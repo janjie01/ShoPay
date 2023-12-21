@@ -72,7 +72,7 @@ function AdminPage() {
         profile_pic: updateUserData.profile_pic,
       };
   
-      const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL}/update/${tableName}/${primaryKey}`, updateData);
+      const response = await axios.put(`https://shopay-t848.onrender.com/update/${tableName}/${primaryKey}`, updateData);
   
       if (response && response.data && response.data.Status === `${tableName} record updated successfully`) {
         alert(response.data.Status);
@@ -125,7 +125,7 @@ function AdminPage() {
         product_qty: updateProductData.product_qty,
       };
   
-      const response = await axios.put(`${import.meta.env.VITE_REACT_APP_API_URL}/update/${tableName}/${primaryKey}`, updateData);
+      const response = await axios.put(`https://shopay-t848.onrender.com/update/${tableName}/${primaryKey}`, updateData);
   
       if (response && response.data && response.data.Status === `${tableName} record updated successfully`) {
         alert(response.data.Status);
@@ -150,7 +150,7 @@ function AdminPage() {
   
     try {
       await productSchema.validate(values, { abortEarly: false });
-      const response = await axios.post('${import.meta.env.VITE_REACT_APP_API_URL}/add_product', values);
+      const response = await axios.post('https://shopay-t848.onrender.com/add_product', values);
   
       if (response && response.data && response.data.Status === 'Product added successfully') {
         alert(response.data.Status);
@@ -188,7 +188,7 @@ function AdminPage() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    fetch('${import.meta.env.VITE_REACT_APP_API_URL}/logout', {
+    fetch('https://shopay-t848.onrender.com/logout', {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -211,7 +211,7 @@ function AdminPage() {
 
   const handleDelete = async (itemId, itemType) => {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_REACT_APP_API_URL}/delete/${itemType}/${itemId}`);
+      const response = await axios.delete(`https://shopay-t848.onrender.com/delete/${itemType}/${itemId}`);
       
       if (response && response.data && response.data.Status === 'Item deleted successfully') {
         alert(response.data.Status);
@@ -232,7 +232,7 @@ function AdminPage() {
   };
 
   useEffect(() => {
-    fetch('${import.meta.env.VITE_REACT_APP_API_URL}/data')
+    fetch('https://shopay-t848.onrender.com/data')
       .then((response) => response.json())
       .then((responseData) => {
         // Ensure responseData is an array before setting the state
@@ -248,7 +248,7 @@ function AdminPage() {
   }, []);
 
   useEffect(() => {
-    fetch('${import.meta.env.VITE_REACT_APP_API_URL}/product')
+    fetch('https://shopay-t848.onrender.com/product')
       .then((response) => response.json())
       .then((responseData) => {
         // Ensure responseData is an array before setting the state

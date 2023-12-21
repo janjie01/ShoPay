@@ -16,7 +16,7 @@ function Profile() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/profile`, {
+        const response = await fetch(`https://shopay-t848.onrender.com/profile`, {
           method: 'GET',
           credentials: 'include',
         });

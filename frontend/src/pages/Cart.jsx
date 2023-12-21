@@ -9,7 +9,7 @@ const CartPage = () => {
   useEffect(() => {
     const fetchCartData = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/cart`, {
+        const response = await fetch(`https://shopay-t848.onrender.com/cart`, {
           method: 'GET',
           credentials: 'include',
         });
@@ -37,7 +37,7 @@ const CartPage = () => {
 
   const handleCheckout = async (item) => {
     try {
-        const response = await fetch(`${import.meta.env.VITE_REACT_APP_API_URL}/checkout`, {
+        const response = await fetch(`https://shopay-t848.onrender.com/checkout`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
