@@ -9,7 +9,7 @@ function Dashboard() {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    fetch(`https://shopay-t848.onrender.com/product`)
+    fetch( `https://shopayapp.netlify.app/product`)
       .then((response) => response.json())
       .then((responseData) => {
         setProductData(responseData);
@@ -20,7 +20,7 @@ function Dashboard() {
   }, []);
 
   const handleLogout = () => {
-    fetch(`https://shopay-t848.onrender.com/logout`, {
+    fetch(`https://shopayapp.netlify.app/logout`, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -50,28 +50,33 @@ function Dashboard() {
 
   return (
     <>
-      <Navbar bg="success" variant="dark" expand="lg" fixed="top" className="p-2 justify-content-between">
-        <Navbar.Brand href="/"><strong>ShoPay</strong></Navbar.Brand>
-        <Form inline className="mx-auto">
-          <Form.Control
-            type="text"
-            placeholder="Search Products"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </Form>
-        <Nav>
-          <Nav.Link href="/profile" className="mr-3">Profile</Nav.Link>
-          <Nav.Link href="/cart" className="mr-3">Cart</Nav.Link>
-          <Button variant="light" onClick={handleLogout}>Logout</Button>
-        </Nav>
+      <Navbar bg="success" variant="dark" expand="lg" fixed="top">
+        <Container>
+          <Navbar.Brand href="/"><strong>ShoPay</strong></Navbar.Brand>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Collapse id="responsive-navbar-nav">
+            <Nav className="mr-auto">
+              <Nav.Link href="/profile">Profile</Nav.Link>
+              <Nav.Link href="/cart">Cart</Nav.Link>
+            </Nav>
+            <Form inline>
+              <Form.Control
+                type="text"
+                placeholder="Search Products"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+            </Form>
+            <Button variant="light" onClick={handleLogout} className="ml-2">Logout</Button>
+          </Navbar.Collapse>
+        </Container>
       </Navbar>
 
       <Container fluid className="mt-5 pt-5">
-        <Row xs={2} md={3} lg={4} xl={5} xxl={6} className="g-4">
+        <Row xs={1} md={2} lg={3} xl={4} xxl={5} className="g-4">
           {filteredProducts.map((product, index) => (
             <Col key={index}>
-              <Card style={{ width: '12rem', height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Card style={{ width: '100%', display: 'flex', flexDirection: 'column' }}>
                 <Card.Img variant="top" src={product.product_photo} style={{ height: '50%', objectFit: 'cover' }} />
                 <Card.Body className="d-flex flex-column">
                   <Card.Title>{product.product_name}</Card.Title>
