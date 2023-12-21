@@ -52,15 +52,6 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://shopayapp.netlify.app'); // Replace * with your frontend's URL in production
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  credentials: 'include',
-  next();
-});
-
 app.use(
   cors({
     origin: ["*"],

@@ -33,7 +33,8 @@ function ProductDetails() {
       .catch((error) => {
         console.error("Error fetching product details:", error);
       });
-  }, [id]);
+  }, [id, isTokenPresent]); // Include isTokenPresent in the dependency array
+  
 
   const addToCart = async () => {
     try {
@@ -76,6 +77,7 @@ function ProductDetails() {
       .then((data) => {
         if (data.Status === "Success") {
           console.log("Logout Successfully");
+          removeCookie("token"); // Remove the 'token' cookie
           navigate("/");
         } else {
           console.error("Logout failed");
@@ -85,6 +87,7 @@ function ProductDetails() {
         console.error("Error during logout:", error);
       });
   };
+  
 
   if (!productDetails) {
     return <div>Loading...</div>;
