@@ -86,7 +86,7 @@ function Dashboard() {
                 <Card.Img
                   variant="top"
                   src={product.product_photo}
-                  style={{ height: "50%", objectFit: "cover" }}
+                  style={{ height: "100%", objectFit: "cover" }}
                 />
                 <Card.Text>Price: {product.product_price}</Card.Text>
                 <Card.Text>Available Quantity: {product.product_qty}</Card.Text>

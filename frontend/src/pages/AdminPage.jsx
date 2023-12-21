@@ -210,11 +210,20 @@ function AdminPage() {
   };
 
   const handleDelete = async (itemId, itemType) => {
+    if (itemId === undefined || itemId === null) {
+      console.error('Invalid itemId:', itemId);
+      return;
+    }
+  
     try {
       const response = await axios.delete(`https://shopay-t848.onrender.com/delete/${itemType}/${itemId}`);
-      
-      if (response && response.data && response.data.Status === 'Item deleted successfully') {
+  
+      if (response && response.data && response.data.Status && response.data.Status.includes('successfully')) {
         alert(response.data.Status);
+  
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
   
         if (itemType === 'user') {
           const updatedUserData = userData.filter(user => user.id !== itemId);
@@ -304,7 +313,7 @@ function AdminPage() {
                       <td>{user.email}</td>
                       <td>
                         <Button variant="success" onClick={() => handleUpdateUserClick(user)}>Update</Button>
-                        <Button variant="danger"  onClick={() => handleDelete(user.id, 'user')}>Delete</Button>
+                        <Button variant="danger" onClick={() => handleDelete(user.user_id, 'user')}>Delete</Button>
                       </td>
                     </tr>
                   ))}

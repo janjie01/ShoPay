@@ -100,7 +100,7 @@ function ProductDetails() {
           fixed="top"
           className="p-2"
         >
-          <Navbar.Brand href="/dashboard">
+          <Navbar.Brand href="/">
             <strong>ShoPay</strong>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -108,15 +108,17 @@ function ProductDetails() {
             <Nav className="ml-auto d-flex align-items-center">
               {isTokenPresent ? (
                 <>
-                  <Nav.Link href="/profile" className="mr-3">
-                    Profile
-                  </Nav.Link>
-                  <Nav.Link href="/cart" className="mr-3">
-                    Cart
-                  </Nav.Link>
-                  <Button variant="light" onClick={handleLogout}>
-                    Logout
-                  </Button>
+                  <Navbar bg="success" variant="dark" expand="lg" fixed="top" className="p-2">
+                  <Navbar.Brand href="/dashboard"><strong>ShoPay</strong></Navbar.Brand>
+                  <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                  <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="ml-auto d-flex align-items-center">
+                      <Nav.Link href="/profile" className="mr-3">Profile</Nav.Link>
+                      <Nav.Link href="/cart" className="mr-3">Cart</Nav.Link>
+                      <Button variant="light" onClick={handleLogout}>Logout</Button>
+                    </Nav>
+                  </Navbar.Collapse>
+                  </Navbar>
                 </>
               ) : (
                 <Button variant="light" href="/login">
@@ -137,9 +139,6 @@ function ProductDetails() {
                 <Card.Title>{productDetails.product_name}</Card.Title>
                 <Card.Subtitle className="mb-2">
                   {productDetails.product_description}
-                </Card.Subtitle>
-                <Card.Subtitle className="mb-2">
-                  Price: {productDetails.product_price}
                 </Card.Subtitle>
                 <Card.Subtitle className="mb-2">
                   Available Quantity: {productDetails.product_qty}
