@@ -21,11 +21,11 @@ function Profile() {
           method: 'GET',
           credentials: 'include',
         });
-  
+
         if (response.ok) {
           const data = await response.json();
 
-          const formattedPurchasedItems = data.purchasedItems.map(item => ({
+          const formattedPurchasedItems = data.purchasedItems.map((item) => ({
             ...item,
             purchased_date: new Date(item.purchased_date).toLocaleString('en-US', {
               year: 'numeric',
@@ -52,52 +52,48 @@ function Profile() {
         console.error('Error fetching profile data:', error.message);
       }
     };
-  
+
     fetchData();
   }, []);
 
   const handleLogout = () => {
     fetch(`https://shopay-t848.onrender.com/logout`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-    .then(response => response.json())
-    .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data.Status === 'Success') {
-            console.log('Logout Successfully');
-            navigate('/');
+          console.log('Logout Successfully');
+          navigate('/');
         } else {
-            console.error('Logout failed');
+          console.error('Logout failed');
         }
-    })
-    .catch(error => {
+      })
+      .catch((error) => {
         console.error('Error during logout:', error);
-    });
-};
+      });
+  };
 
   return (
     <>
-      <div>
-          <Navbar bg="success" variant="dark" expand="lg" fixed="top" className="p-2">
-          <Navbar.Brand href="/dashboard"><strong>ShoPay</strong></Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ml-auto d-flex align-items-center">
-              <Nav.Link href="/profile" className="mr-3">Profile</Nav.Link>
-              <Nav.Link href="/cart" className="mr-3">Cart</Nav.Link>
-              <Button variant="light" onClick={handleLogout}>Logout</Button>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </div>
+      <Navbar bg="success" variant="dark" expand="lg" fixed="top" className="p-2 justify-content-between">
+        <Navbar.Brand href="/dashboard"><strong>ShoPay</strong></Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ml-auto">
+            <Nav.Link href="/cart" className="mr-3">Cart</Nav.Link>
+            <Button variant="light" onClick={handleLogout}>Logout</Button>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
       <Container className='mt-3 pt-5'>
-        
         <Row className="justify-content-center">
           <Col md={6}>
-          <h1>Profile</h1>
+            <h1>Profile</h1>
             <Card>
               <Image src={profileData.profile_pic} alt="Profile" fluid />
               <Card.Body>
@@ -113,17 +109,17 @@ function Profile() {
       <Container fluid>
         <Row className="justify-content-center">
           <Col md={6}>
-          <h1>Purchase History</h1>
+            <h1>Purchase History</h1>
             {profileData.purchasedItems.map((item, index) => (
-                <Card key={index}>
-                  <Card.Body>
-                    <Card.Subtitle className="mb-2">Product Name: {item.product_name}</Card.Subtitle>
-                    <Card.Subtitle className="mb-2">Quantity: {item.quantity}</Card.Subtitle>
-                    <Card.Subtitle className="mb-2">Purchased Date: {item.purchased_date}</Card.Subtitle>
-                  </Card.Body>
-                </Card>
-              ))}
-              {profileData.purchasedItems.length === 0 && <p>No purchase history</p>}
+              <Card key={index}>
+                <Card.Body>
+                  <Card.Subtitle className="mb-2">Product Name: {item.product_name}</Card.Subtitle>
+                  <Card.Subtitle className="mb-2">Quantity: {item.quantity}</Card.Subtitle>
+                  <Card.Subtitle className="mb-2">Purchased Date: {item.purchased_date}</Card.Subtitle>
+                </Card.Body>
+              </Card>
+            ))}
+            {profileData.purchasedItems.length === 0 && <p>No purchase history</p>}
           </Col>
         </Row><br />
       </Container>

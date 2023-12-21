@@ -1,6 +1,7 @@
+// ProductDetails.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Card, Button, Container, Row, Col, Navbar, Image } from 'react-bootstrap';
+import { Card, Button, Container, Row, Col, Navbar, Nav, Image } from 'react-bootstrap';
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 
@@ -39,7 +40,7 @@ function ProductDetails() {
         const data = await response.json();
 
         if (response.status === 401) {
-            // Handle 405 (Method Not Allowed) - Show an alert
+            // Handle 401 (Unauthorized) - Show an alert
             alert('You must log in first.');
         } else {
             // Handle other response statuses
@@ -49,7 +50,8 @@ function ProductDetails() {
         console.error('Error adding to cart:', error);
         setStatus('Error adding to cart');
     }
-  };
+};
+
 
   const handleLogout = () => {
     fetch(`https://shopay-t848.onrender.com/logout`, {
@@ -96,7 +98,7 @@ function ProductDetails() {
                 <Card.Subtitle className="mb-2">{productDetails.product_description}</Card.Subtitle>
                 <Card.Subtitle className="mb-2">Price: {productDetails.product_price}</Card.Subtitle>
                 <Card.Subtitle className="mb-2">Available Quantity: {productDetails.product_qty}</Card.Subtitle>
-                {isTokenPresent && <Button variant='secondary' onClick={addToCart}>Add To Cart</Button>}
+                <Button variant='secondary' onClick={addToCart}>Add To Cart</Button>
                 <p>{status}</p>
               </Card.Body>
             </Card>
