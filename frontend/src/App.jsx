@@ -10,10 +10,12 @@ import ProductDetails from './pages/ProductDetails';
 import Cart from './pages/Cart';
 import NotFound from './pages/error404';
 
-const ProtectedRoute = ({ element, allowedRoles, ...props }) => {
+
+const ProtectedRoute = ({ element, userRole, allowedRoles, ...props }) => {
   const navigate = useNavigate();
-  const userRole = "admin"; // Example role, replace it with your actual logic
+   // Example role, replace it with your actual logic
   const isAuthenticated = !!document.cookie; // Check if the user is authenticated
+
 
   // Define routes that don't require authentication
   const publicRoutes = ["/", "/product/:id"];
@@ -34,7 +36,7 @@ const ProtectedRoute = ({ element, allowedRoles, ...props }) => {
 
 const AdminRoute = ({ element, ...props }) => {
   return (
-    <ProtectedRoute element={element} allowedRoles={["admin"]} {...props} />
+    <ProtectedRoute element={element} userRole={"admin"} allowedRoles={["admin"]} {...props} />
   );
 };
 
@@ -48,20 +50,20 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute element={<Dashboard />} allowedRoles={["admin","user"]} />
+            <ProtectedRoute element={<Dashboard />} userRole={"user"} allowedRoles={["admin","user"]} />
           }
         />
         <Route
           path="/profile"
           element={
-            <ProtectedRoute element={<Profile />} allowedRoles={["admin","user"]} />
+            <ProtectedRoute element={<Profile />} userRole={"user"} allowedRoles={["admin","user"]} />
           }
         />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route
           path="/cart"
           element={
-            <ProtectedRoute element={<Cart />} allowedRoles={["admin","user"]} />
+            <ProtectedRoute element={<Cart />} userRole={"user"} allowedRoles={["admin","user"]} />
           }
         />
         <Route
