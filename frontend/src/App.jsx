@@ -48,20 +48,20 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute element={<Dashboard />} allowedRoles={["admin"]} />
+            <ProtectedRoute element={<Dashboard />} allowedRoles={["admin","user"]} />
           }
         />
         <Route
           path="/profile"
           element={
-            <ProtectedRoute element={<Profile />} allowedRoles={["admin"]} />
+            <ProtectedRoute element={<Profile />} allowedRoles={["admin","user"]} />
           }
         />
         <Route path="/product/:id" element={<ProductDetails />} />
         <Route
           path="/cart"
           element={
-            <ProtectedRoute element={<Cart />} allowedRoles={["admin"]} />
+            <ProtectedRoute element={<Cart />} allowedRoles={["admin","user"]} />
           }
         />
         <Route
