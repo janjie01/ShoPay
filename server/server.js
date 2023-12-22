@@ -355,32 +355,30 @@ app.post("/add_product", async (req, res) => {
   }
 });
 //delete
-app.delete("/delete/:itemType/:itemId", (req, res) => {
+app.delete('/delete/:itemType/:itemId', (req, res) => {
   const { itemType, itemId } = req.params;
   let tableName;
 
-  if (itemType === "user") {
-    tableName = "users";
-  } else if (itemType === "product") {
-    tableName = "product";
+  if (itemType === 'user') {
+      tableName = 'users';
+  } else if (itemType === 'product') {
+      tableName = 'product';
   } else {
-    return res.status(400).json({ Error: "Invalid item type" });
+      return res.status(400).json({ Error: 'Invalid item type' });
   }
-  if (db.state === "disconnected") {
+  if (db.state === 'disconnected') {
     db.connect();
   }
 
-  const deleteQuery = `DELETE FROM ${tableName} WHERE ${
-    itemType === "user" ? "id" : "product_id"
-  } = ?`;
+  const deleteQuery = `DELETE FROM ${tableName} WHERE ${itemType === 'user' ? 'user_id' : 'product_id'} = ?`;
 
   db.query(deleteQuery, [itemId], (err, result) => {
-    if (err) {
-      console.error("Error deleting item:", err);
-      return res.status(500).json({ Error: "Internal Server Error" });
-    }
+      if (err) {
+          console.error('Error deleting item:', err);
+          return res.status(500).json({ Error: 'Internal Server Error' });
+      }
 
-    return res.json({ Status: "Item deleted successfully" });
+      return res.json({ Status: `${itemType} Deleted successfully` });
   });
 });
 //update
