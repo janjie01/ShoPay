@@ -77,7 +77,7 @@ function Profile() {
         console.error('Error during logout:', error);
       });
   };
-
+//Kaya pani
   return (
     <>
       <Navbar bg="success" variant="dark" expand="lg" fixed="top" className="p-2 justify-content-between">
