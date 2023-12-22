@@ -1,14 +1,19 @@
-import React, { useEffect } from 'react';
-import { HashRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import Home from './pages/Home';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import AdminPage from './pages/AdminPage';
-import Profile from './pages/Profile';
-import ProductDetails from './pages/ProductDetails';
-import Cart from './pages/Cart';
-import NotFound from './pages/error404';
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import AdminPage from "./pages/AdminPage";
+import Profile from "./pages/Profile";
+import ProductDetails from "./pages/ProductDetails";
+import Cart from "./pages/Cart";
+import NotFound from "./pages/error404";
 
 const ProtectedRoute = ({ element, allowedRoles, ...props }) => {
   const navigate = useNavigate();
